@@ -26,24 +26,21 @@ A smart AI-powered code editor with real-time suggestions, error detection, and 
    Then open your browser and visit http://localhost:3000
 
 ## Usage 🚀
-Open the editor in your browser
+- **Open the editor in your browser
+- **Select your programming language from the dropdown
+- **Start typing - AI suggestions will appear automatically
+- **Use Ctrl+Space to manually trigger suggestions
+- **Right-click on code for refactoring options and explanations
 
-Select your programming language from the dropdown
+### Technologies Used 💻
+ # Component	Technology
+- **Frontend	   : React.js
+- **Code Editor	: Monaco
+- **AI Backend	   : Google Gemini
+- **Server	      : Node.js
+- **API Framework : Express.js
 
-Start typing - AI suggestions will appear automatically
-
-Use Ctrl+Space to manually trigger suggestions
-
-Right-click on code for refactoring options and explanations
-
-Technologies Used 💻
-Component	Technology
-Frontend	React.js
-Code Editor	Monaco
-AI Backend	OpenAI API
-Server	Node.js
-API Framework	Express.js
-Contributing 🤝
+### Contributing 🤝
 Fork the repository
 
 Create your feature branch (git checkout -b feature/AmazingFeature)
@@ -58,6 +55,5 @@ Open a Pull Request
 MIT License - see the LICENSE file for details.
 
 ## Contact 📧
-Krishnanu Nag
-GitHub Profile
-Email: krishnanunag@gmail.com
+- **Krishnanu Nag
+- **Email: krishnanunag@gmail.com
