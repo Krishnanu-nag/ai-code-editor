@@ -55,5 +55,5 @@ Open a Pull Request
 MIT License - see the LICENSE file for details.
 
 ## Contact 📧
-- **Krishnanu Nag
-- **Email: krishnanunag@gmail.com
+- Krishnanu Nag
+- Email: krishnanunag@gmail.com
