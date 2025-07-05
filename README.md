@@ -27,18 +27,18 @@ A smart AI-powered code editor with real-time suggestions, error detection, and 
 
 ## Usage 🚀
 - Open the editor in your browser
-- **Select your programming language from the dropdown
-- **Start typing - AI suggestions will appear automatically
-- **Use Ctrl+Space to manually trigger suggestions
-- **Right-click on code for refactoring options and explanations
+- Select your programming language from the dropdown
+- Start typing - AI suggestions will appear automatically
+- Use Ctrl+Space to manually trigger suggestions
+- Right-click on code for refactoring options and explanations
 
 ### Technologies Used 💻
  # Component	Technology
-- **Frontend	   : React.js
-- **Code Editor	: Monaco
-- **AI Backend	   : Google Gemini
-- **Server	      : Node.js
-- **API Framework : Express.js
+- Frontend	   : React.js
+- Code Editor	: Monaco
+- AI Backend	   : Google Gemini
+- Server	      : Node.js
+- API Framework : Express.js
 
 ### Contributing 🤝
 Fork the repository
