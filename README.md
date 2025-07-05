@@ -26,7 +26,7 @@ A smart AI-powered code editor with real-time suggestions, error detection, and 
    Then open your browser and visit http://localhost:3000
 
 ## Usage 🚀
-- **Open the editor in your browser
+- Open the editor in your browser
 - **Select your programming language from the dropdown
 - **Start typing - AI suggestions will appear automatically
 - **Use Ctrl+Space to manually trigger suggestions
