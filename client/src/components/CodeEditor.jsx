@@ -20,16 +20,18 @@ const CodeEditor = () => {
 
   const handleSubmit = async (action) => {
     const prompt = promptRef.current?.value || action;
-    
+    if (!prompt.trim()) return;
+
     setIsLoading(true);
     try {
       const response = await axios.post('http://localhost:3001/api/generate', {
         prompt: `${action}: ${code}\n\n${prompt}`,
         context: conversationContext
       });
-      
+
       setAiResponse(response.data.response);
       setConversationContext(prev => `${prev}\n\nUser: ${prompt}\nAI: ${response.data.response}`);
+      promptRef.current.value = '';
     } catch (error) {
       console.error('Error:', error);
       setAiResponse('Failed to get AI response');
@@ -39,45 +41,42 @@ const CodeEditor = () => {
   };
 
   const handleRunCode = async () => {
-  setIsLoading(true);
-  try {
-    const response = await axios.post('http://localhost:3001/api/execute', {
-      code,
-      language
-    });
-    setAiResponse(response.data.output);
-  } catch (error) {
-    setAiResponse('Failed to execute code');
-  } finally {
-    setIsLoading(false);
-  }
-};
+    setIsLoading(true);
+    try {
+      const response = await axios.post('http://localhost:3001/api/execute', { code, language });
+      setAiResponse(response.data.output);
+    } catch (error) {
+      setAiResponse('Failed to execute code');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-// Add to toolbar:
-<button onClick={handleRunCode}>Run Code</button>
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSubmit('');
+    }
+  };
 
   return (
-    <div className="editor-container">
-      <div className="toolbar">
+    <div className="editor-container" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      {/* Toolbar */}
+      <div className="toolbar" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
         <select value={language} onChange={handleLanguageChange}>
           <option value="javascript">JavaScript</option>
           <option value="python">Python</option>
           <option value="java">Java</option>
           <option value="cpp">C++</option>
         </select>
-        
-        <button onClick={() => handleSubmit('Explain this code')}>
-          Explain
-        </button>
-        <button onClick={() => handleSubmit('Debug this code')}>
-          Debug
-        </button>
-        <button onClick={() => handleSubmit('Optimize this code')}>
-          Optimize
-        </button>
+        <button onClick={() => handleSubmit('Explain this code')}>Explain</button>
+        <button onClick={() => handleSubmit('Debug this code')}>Debug</button>
+        <button onClick={() => handleSubmit('Optimize this code')}>Optimize</button>
+        <button onClick={handleRunCode}>Run Code</button>
       </div>
 
-      <div className="editor-wrapper">
+      {/* Editor */}
+      <div className="editor-wrapper" style={{ border: '1px solid #ccc', borderRadius: '4px', overflow: 'hidden' }}>
         <Editor
           height="60vh"
           language={language}
@@ -92,26 +91,29 @@ const CodeEditor = () => {
         />
       </div>
 
-      <div className="ai-interaction">
-        <input
-          type="text"
-          ref={promptRef}
-          placeholder="Ask AI about your code..."
-        />
-        <button onClick={() => handleSubmit('')}>
-          Ask AI
-        </button>
-      </div>
+      {/* Ask AI + AI Response Column */}
+      <div className="ai-container" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <div className="ai-interaction" style={{ display: 'flex', gap: '10px' }}>
+          <input
+            type="text"
+            ref={promptRef}
+            placeholder="Ask AI about your code..."
+            onKeyDown={handleKeyPress}
+            style={{ flex: 1, padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
+          />
+          <button onClick={() => handleSubmit('')}>Ask AI</button>
+        </div>
 
-      <div className="ai-response">
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <pre>{aiResponse}</pre>
-        )}
+        <div className="ai-response" style={{ border: '1px solid #ccc', borderRadius: '4px', padding: '10px', minHeight: '100px', backgroundColor: '#1e1e1e', color: '#fff' }}>
+          {isLoading ? (
+            <div className="loading-spinner">Loading...</div>
+          ) : (
+            <pre className="text-response">{aiResponse}</pre>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
-export default CodeEditor; 
+export default CodeEditor;
